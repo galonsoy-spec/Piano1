@@ -6,13 +6,13 @@
 <meta name="theme-color" content="#6d28d9">
 <title>Piano Fácil</title>
 <style>
-:root{--p:#6d28d9;--p2:#8b5cf6;--bg:#f5f3ff;--ink:#1e1b4b;--ok:#16a34a;--bad:#dc2626;--mut:#6b7280}
+:root{--sh:150px;--p:#6d28d9;--p2:#8b5cf6;--bg:#f5f3ff;--ink:#1e1b4b;--ok:#16a34a;--bad:#dc2626;--mut:#6b7280}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink)}
 .wrap{max-width:600px;margin:0 auto;padding:14px 14px 70px}
 h1{font-size:22px;margin:0}
 h2{font-size:17px;margin:14px 0 2px}
-.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:8px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:8px;padding-right:52px}
 .pill{background:#fff;border-radius:999px;padding:6px 12px;font-size:14px;font-weight:600;box-shadow:0 1px 3px #0001}
 .card{background:#fff;border-radius:16px;padding:14px;margin-bottom:10px;box-shadow:0 1px 4px #0001}
 .lesson{display:flex;justify-content:space-between;align-items:center;cursor:pointer;border:2px solid transparent;gap:8px}
@@ -27,19 +27,19 @@ button.sec{background:#ede9fe;color:var(--p)}
 button.on{background:var(--ok);color:#fff}
 button.big2{width:100%;padding:14px;font-size:17px;margin-bottom:10px}
 button:disabled{opacity:.5}
-.fsb{position:fixed;right:12px;bottom:12px;width:46px;height:46px;border-radius:50%;padding:0;font-size:22px;z-index:20;box-shadow:0 2px 8px #0004}
+.fsb{position:fixed;right:10px;top:8px;width:40px;height:40px;border-radius:50%;padding:0;font-size:20px;z-index:20;box-shadow:0 2px 8px #0004}
 .row{display:flex;gap:8px;flex-wrap:wrap}
 .row>button{flex:1}
 .lvl{color:var(--mut);font-size:13px;margin:0 0 6px}
 .staffbox{overflow-x:auto;scroll-behavior:smooth;background:#fffdf7;border:1px solid #e5e7eb;border-radius:12px;margin-bottom:8px}
-.staffbox svg{display:block}
-.big{text-align:center;margin:2px 0 8px}
-.big .n{font-size:54px;font-weight:800;line-height:1;color:var(--p)}
-.big .nm{font-size:20px;font-weight:700}
-.big .msg{min-height:22px;font-size:14px;color:var(--mut);margin-top:4px}
+.staffbox svg{display:block;height:var(--sh);width:auto}
+.big{display:flex;align-items:baseline;justify-content:center;gap:10px;flex-wrap:wrap;margin:2px 0 6px}
+.big .n{font-size:34px;font-weight:800;line-height:1;color:var(--p)}
+.big .nm{font-size:18px;font-weight:700}
+.big .msg{flex-basis:100%;text-align:center;min-height:18px;font-size:13px;color:var(--mut)}
 .big .msg.bad{color:var(--bad)}
 .big .msg.ok{color:var(--ok)}
-.kb{position:relative;display:flex;height:160px;user-select:none;touch-action:manipulation;margin:6px 0 10px}
+.kb{position:relative;display:flex;height:125px;user-select:none;touch-action:manipulation;margin:6px 0 10px}
 .w{flex:1;background:#fff;border:1px solid #9ca3af;border-radius:0 0 8px 8px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding-bottom:6px;font-weight:700;font-size:15px;position:relative}
 .w small{font-size:9px;color:var(--mut);font-weight:500}
 .bk{position:absolute;top:0;width:6.4%;height:62%;background:#111827;border-radius:0 0 6px 6px;z-index:2}
@@ -56,11 +56,58 @@ button:disabled{opacity:.5}
 .note{font-size:13px;color:var(--mut);line-height:1.4}
 .info{font-size:14px;line-height:1.45;background:#f5f3ff;border-radius:10px;padding:8px 10px;margin-bottom:8px}
 .hide{display:none}
-.res{text-align:center}
+.res{text-align:center;position:fixed;left:10px;right:10px;bottom:10px;max-width:480px;margin:0 auto;z-index:30;box-shadow:0 8px 30px #0006}
 .res .stars{font-size:40px}
 .warn{background:#fef3c7;color:#92400e;border-radius:10px;padding:8px 10px;font-size:13px;margin-bottom:8px}
 .opt{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;margin-top:10px}
 .opt label{display:flex;align-items:center;gap:6px}
+.card.main,.card.side{padding:10px}
+.info{margin:6px 0 0}
+details>summary{cursor:pointer;font-size:13px;font-weight:600;color:var(--p);padding:2px 0}
+.side .row>button{flex:1 1 40%;padding:9px 6px;font-size:14px}
+.side .opt{margin-top:8px}
+@media (orientation:landscape) and (max-height:560px){
+ :root{--sh:92px}
+ .top button,.top .pill{padding:4px 10px;font-size:13px}
+ .fsb{width:34px;height:34px;font-size:17px;top:6px}
+ .top{padding-right:44px;margin-bottom:2px}
+ .card.main{padding:6px 8px}
+ .big{margin:0 0 2px}
+ .big .msg{flex-basis:auto;min-height:0;font-size:12px}
+ .staffbox{margin-bottom:2px}
+ .wrap{max-width:none;padding:6px 10px 10px}
+ .top{margin-bottom:4px}
+ .cols{display:grid;grid-template-columns:minmax(0,1fr) 210px;gap:8px;align-items:start}
+ .kb{margin:2px 0 2px}
+ .card{margin-bottom:6px}
+ .hear{font-size:14px;min-height:18px;margin-bottom:0}
+ .big .n{font-size:28px}
+}
+.playing,.playing body{overflow:hidden;height:100%}
+.playing .wrap{height:100dvh;display:flex;flex-direction:column;padding:8px 10px}
+.playing #play{flex:1;display:flex;flex-direction:column;min-height:0}
+.playing .cols{flex:1;display:flex;flex-direction:column;min-height:0;gap:6px}
+.playing .card{margin-bottom:0}
+.playing .card.main{flex:1;display:flex;flex-direction:column;min-height:0}
+.playing .kb{flex:1;height:auto;min-height:70px;max-height:none}
+.playing .info{max-height:22vh;overflow:auto}
+.playing .staffbox{flex:none}
+@media (orientation:landscape) and (max-height:560px){
+ .playing .cols{display:grid;grid-template-columns:minmax(0,1fr) 210px;align-items:stretch}
+ .playing .kb{height:auto;max-height:none}
+}
+.tabs{display:flex;gap:6px;margin-bottom:10px}
+.tab{flex:1;background:#ede9fe;color:var(--p);padding:9px 2px;font-size:13px;border-radius:12px}
+.tab.act{background:var(--p);color:#fff}
+.theory summary{font-size:15px;color:var(--ink);padding:4px 0}
+.theory .tx{font-size:14px;line-height:1.5;margin-top:6px}
+.fall{position:relative;height:var(--sh);background:#1e1b4b;border-radius:12px;margin-bottom:8px;overflow:hidden;background-image:linear-gradient(90deg,#3b3790 1px,transparent 1px);background-size:7.142857% 100%}
+.fb{position:absolute;border-radius:7px;background:#8b5cf6;color:#fff;font-weight:800;font-size:13px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:3px;transition:bottom .35s ease,opacity .3s;border:1px solid #c4b5fd}
+.fb.cur{background:#f59e0b;border-color:#fde68a}
+.playing .fall{flex:none}
+.meter{height:8px;background:#e5e7eb;border-radius:6px;overflow:hidden;margin:0 auto 6px;max-width:280px}
+.meter i{display:block;height:100%;width:0;background:#9ca3af}
+.meter i.on{background:var(--ok)}
 </style>
 </head>
 <body>
@@ -68,8 +115,16 @@ button:disabled{opacity:.5}
 
 <div id="home">
   <div class="top"><h1>🎹 Piano Fácil</h1><div class="pill" id="stat"></div></div>
-  <button class="big2" id="cont">▶ Continuar</button>
-  <div id="list"></div>
+  <div class="tabs" id="tabs">
+    <button class="tab" data-t="curso">📚 Curso</button>
+    <button class="tab" data-t="juegos">🎮 Juegos</button>
+    <button class="tab" data-t="canciones">🎵 Canciones</button>
+    <button class="tab" data-t="teoria">🎓 Teoría</button>
+  </div>
+  <div id="t_curso"><button class="big2" id="cont">▶ Continuar</button><div id="list"></div></div>
+  <div id="t_juegos" class="hide"></div>
+  <div id="t_canciones" class="hide"></div>
+  <div id="t_teoria" class="hide"></div>
 </div>
 
 <div id="play" class="hide">
@@ -77,28 +132,34 @@ button:disabled{opacity:.5}
     <button class="sec" id="back">← Curso</button>
     <div class="pill" id="ttl"></div>
   </div>
-  <div class="card">
-    <div class="info" id="info"></div>
-    <div class="sw"><div class="staffbox" id="staffbox"></div></div>
-    <div class="big"><div class="n" id="bn">–</div><div class="nm" id="bnm"></div><div class="msg" id="msg"></div></div>
+  <div class="cols">
+  <div class="card main">
+    <details id="infoD"><summary>ℹ️ Explicación de la lección</summary><div class="info" id="info"></div></details>
+    <div class="sw" id="sw"><div class="staffbox" id="staffbox"></div></div>
+    <div class="fall hide" id="fall"></div>
+    <div class="big"><span class="n" id="bn">–</span><span class="nm" id="bnm"></span><span class="msg" id="msg"></span></div>
     <div class="kb" id="kb"></div>
     <div class="hear" id="hear"></div>
+    <div class="meter hide" id="meter"><i id="mi"></i></div>
   </div>
-  <div class="card">
-    <div class="row" style="margin-bottom:8px">
+  <div class="card side">
+    <div class="row">
       <button class="sec" id="mTap">👆 Pantalla</button>
       <button class="sec" id="mMic">🎤 Micrófono</button>
-    </div>
-    <div class="warn hide" id="warn"></div>
-    <div class="row">
       <button class="sec" id="demo">🔊 Escuchar</button>
       <button class="sec" id="reset">↺ Reiniciar</button>
     </div>
+    <div class="warn hide" id="warn" style="margin-top:8px"></div>
+    <details style="margin-top:8px"><summary>⚙️ Opciones</summary>
     <div class="opt">
       <label><input type="checkbox" id="oLab"> Números bajo las notas</label>
       <label><input type="checkbox" id="oHint"> Marcar la tecla</label>
+      <label><input type="checkbox" id="oFall"> Cascada de notas (en vez de partitura)</label>
+      <label>Sensibilidad del micro <input type="range" id="oSens" min="1" max="15" step="1"></label>
     </div>
-    <p class="note" style="margin:10px 0 0">Toca la nota resaltada. Vale cualquier octava del teclado: lo importante es el nombre de la nota. La app espera a que toques la nota correcta; la duración de cada nota la ves en la partitura y puedes oírla con "Escuchar".</p>
+    <p class="note" style="margin:8px 0 0">Toca la nota resaltada. Vale cualquier octava: lo importante es el nombre de la nota. La app espera a que toques la correcta; la duración la ves en la partitura y la oyes con "Escuchar".</p>
+    </details>
+  </div>
   </div>
   <div class="card res hide" id="res"></div>
 </div>
@@ -120,46 +181,110 @@ const LEVELS=[
   {id:'a2',t:'Do y Re',info:'<b>Re</b> (el 2) es la tecla blanca de al lado, a la derecha del Do, entre las dos teclas negras.',s:'60 62 60 62 62 60 62 60:2'},
   {id:'a3',t:'Do Re Mi',info:'<b>Mi</b> (el 3) está a la derecha del Re. Mira cómo suben las notas en la partitura: cada tecla blanca es un escalón.',s:'60 62 64 64 62 60 62 64 60:2'},
   {id:'a4',t:'Fa y Sol',info:'<b>Fa</b> (4) y <b>Sol</b> (5). Tu mano derecha se queda quieta: un dedo para cada nota, del pulgar al meñique.',s:'60 64 65 67 67 65 64 62 60:2'},
-  {id:'a5',t:'Estrellita',info:'Tu primera canción. Las notas con palito y relleno son <b>negras</b> (1 pulso); las huecas son <b>blancas</b> (2 pulsos).',s:'60 60 67 67 69 69 67:2 65 65 64 64 62 62 60:2 67 67 65 65 64 64 62:2 67 67 65 65 64 64 62:2 60 60 67 67 69 69 67:2 65 65 64 64 62 62 60:2'}
+  {id:'a5',ts:'4/4',t:'Estrellita',info:'Tu primera canción. Las notas con palito y relleno son <b>negras</b> (1 pulso); las huecas son <b>blancas</b> (2 pulsos).',s:'60 60 67 67 69 69 67:2 65 65 64 64 62 62 60:2 67 67 65 65 64 64 62:2 67 67 65 65 64 64 62:2 60 60 67 67 69 69 67:2 65 65 64 64 62 62 60:2'}
  ]},
  {t:'Nivel 2 · Más notas',d:'La, Si y el Do agudo',clef:'t',lessons:[
   {id:'b1',t:'La',info:'<b>La</b> (el 6). Sube desde el Sol: tu mano se abre un poco.',s:'67 69 67 65 64 65 67 69 67:2'},
   {id:'b2',t:'Si y Do agudo',info:'<b>Si</b> (7) y el <b>Do agudo</b>, que es otra vez el 1 pero una octava más arriba (tecla blanca a la izquierda del siguiente grupo de dos negras).',s:'67 69 71 72 72 71 69 67 65 64 62 60:2'},
   {id:'b3',t:'La escala de Do',info:'Las 8 notas seguidas, subiendo y bajando. Es la base de todo. Usa los dedos 1-2-3, pasa el pulgar por debajo y sigue.',s:'60 62 64 65 67 69 71 72:2 72 71 69 67 65 64 62 60:2'},
-  {id:'b4',t:'Oda a la alegría',info:'Una nota con un <b>punto</b> dura una vez y media: la negra con punto dura 1 pulso y medio, y la corchea que sigue, medio.',s:'64 64 65 67 67 65 64 62 60 60 62 64 64:1.5 62:.5 62:2 64 64 65 67 67 65 64 62 60 60 62 64 62:1.5 60:.5 60:2'},
+  {id:'b4',ts:'4/4',t:'Oda a la alegría',info:'Una nota con un <b>punto</b> dura una vez y media: la negra con punto dura 1 pulso y medio, y la corchea que sigue, medio.',s:'64 64 65 67 67 65 64 62 60 60 62 64 64:1.5 62:.5 62:2 64 64 65 67 67 65 64 62 60 60 62 64 62:1.5 60:.5 60:2'},
   {id:'b5',t:'Cumpleaños feliz',info:'Empieza con una notita corta y otra más corta. Toca despacio: la app te espera.',s:'67:.75 67:.25 69 67 72 71:2 67:.75 67:.25 69 67 74 72:2 67:.75 67:.25 79 76 72 71 69 77:.75 77:.25 76 72 74 72:2'}
  ]},
- {t:'Nivel 3 · Mano izquierda',d:'Clave de Fa, notas graves',clef:'b',lessons:[
+ {t:'Nivel 3 · Ejercicios de dedos',d:'Mueve la mano por el teclado, con los números de tus pegatinas',clef:'t',lessons:[
+  {id:'f1',t:'Patrón 1-3-2-4',info:'Toca <b>1-3-2-4</b>, luego sube un escalón: <b>2-4-3-5</b>, <b>3-5-4-6</b>… Tu mano se desplaza por el teclado. Los números de abajo son los de tus pegatinas.',s:'60 64 62 65 62 65 64 67 64 67 65 69 65 69 67 71 67 71 69 72:2'},
+  {id:'f2',t:'Saltos 1-5',info:'Salta de la nota 1 a la <b>5</b> y vuelve: <b>1-5, 2-5, 3-5, 4-5</b>. Mantén la mano suelta y relajada.',s:'60 67 62 67 64 67 65 67 64 60:2'},
+  {id:'f3',t:'Arpegio 1-3-5',info:'<b>1-3-5-3</b> repetido: son las notas del acorde de Do. Suena bonito y entrena los dedos 1, 3 y 5.',s:'60 64 67 64 60 64 67 64 60 67 60:2'},
+  {id:'f4',t:'Bajando 5-3-4-2',info:'El mismo juego pero hacia abajo: <b>5-3-4-2-3-1-2-1</b>. Mira cómo bajan las notas en la partitura.',s:'67 64 65 62 64 60 62 60:2'},
+  {id:'f5',t:'Escalones 1-2-3',info:'Tres notas seguidas y vuelves una atrás: <b>1-2-3, 2-3-4, 3-4-5</b>… Es una escalera que sube hasta el 1 agudo.',s:'60 62 64 62 64 65 64 65 67 65 67 69 67 69 71 69 71 72:2'},
+  {id:'f6',t:'Saltos de octava',info:'Del <b>1</b> al <b>1 agudo</b> (una octava): abre bien la mano. Después, <b>3-1 agudo</b> y <b>5-1 agudo</b>.',s:'60 72 60 72 64 72 67 72 64 60:2'}
+ ]},
+ {t:'Nivel 4 · Mano izquierda',d:'Clave de Fa, notas graves',clef:'b',lessons:[
   {id:'c1',t:'Do y Sol graves',info:'Con la mano izquierda tocas notas más graves, a la izquierda del teclado. La partitura cambia a la <b>clave de Fa</b>. Busca un Do (1) y el Sol (5) hacia la izquierda.',s:'48 55 48 55 48:2'},
   {id:'c2',t:'Escala izquierda',info:'La misma escala de Do, ahora con la mano izquierda. El meñique toca el Do grave.',s:'48 50 52 53 55 57 59 60:2 60 59 57 55 53 52 50 48:2'},
   {id:'c3',t:'Arpegio de Do',info:'Un <b>arpegio</b> toca las notas de un acorde una a una: Do, Mi y Sol. Es el acompañamiento más usado.',s:'48 52 55 52 48 52 55:2 52 48 52 55 60:2'},
-  {id:'c4',t:'Fray Santiago (izq.)',info:'La canción de siempre, con la mano izquierda. Las notas rápidas con rabito son <b>corcheas</b>.',s:'48 50 52 48 48 50 52 48 52 53 55:2 52 53 55:2 55:.5 57:.5 55:.5 53:.5 52 48 55:.5 57:.5 55:.5 53:.5 52 48 48 55 48:2 48 55 48:2'}
+  {id:'c4',t:'Fray Santiago (izq.)',info:'La canción de siempre, con la mano izquierda. Las notas rápidas con rabito son <b>corcheas</b>.',s:'48 50 52 48 48 50 52 48 52 53 55:2 52 53 55:2 55:.5 57:.5 55:.5 53:.5 52 48 55:.5 57:.5 55:.5 53:.5 52 48 48 55 48:2 48 55 48:2'},
+  {id:'c5',t:'Patrón 1-3-2-4 (izq.)',info:'El ejercicio <b>1-3-2-4</b> con la mano izquierda: sube escalón a escalón desde el Do grave.',s:'48 52 50 53 50 53 52 55 52 55 53 57 53 57 55 59 55 59 57 60:2'}
  ]},
- {t:'Nivel 4 · Canciones',d:'Mano derecha, repertorio',clef:'t',lessons:[
+ {t:'Nivel 5 · Canciones',d:'Mano derecha, repertorio',clef:'t',lessons:[
   {id:'d1',t:'Fray Santiago',info:'Ahora con la derecha. Cada frase se repite dos veces: aprovéchalo para memorizarla.',s:'60 62 64 60 60 62 64 60 64 65 67:2 64 65 67:2 67:.5 69:.5 67:.5 65:.5 64 60 67:.5 69:.5 67:.5 65:.5 64 60 60 67 60:2 60 67 60:2'},
   {id:'d2',t:'Claro de luna (Au clair)',info:'Canción tradicional francesa, muy fácil. Fíjate en la <b>redonda</b> del final: dura 4 pulsos.',s:'60 60 60 62 64:2 62:2 60 64 62 62 60:4'},
-  {id:'d3',t:'Jingle Bells',info:'El estribillo. Hay un salto de Mi a Sol y a Do: mira bien dónde caen en la partitura.',s:'64 64 64:2 64 64 64:2 64 67 60:1.5 62:.5 64:4 65 65 65:1.5 65:.5 65 64 64 64:.5 64:.5 62 62 64 62:2 67:2'}
+  {id:'d3',t:'Jingle Bells',info:'El estribillo. Hay un salto de Mi a Sol y a Do: mira bien dónde caen en la partitura.',s:'64 64 64:2 64 64 64:2 64 67 60:1.5 62:.5 64:4 65 65 65:1.5 65:.5 65 64 64 64:.5 64:.5 62 62 64 62:2 67:2'},
+  {id:'d4',ts:'4/4',t:'Mary tenía un corderito',info:'Canción tradicional, muy fácil: solo usa Do, Re, Mi y Sol. Cuidado con las blancas del final de cada frase.',s:'64 62 60 62 64 64 64:2 62 62 62:2 64 67 67:2 64 62 60 62 64 64 64 64 62 62 64 62 60:4'},
+  {id:'d5',t:'Noche de paz (simple)',info:'Villancico de 1818, versión simplificada. Va despacio y tiene notas largas: respira con ellas. Verás notas agudas (La, Si, Do, Re).',s:'67:1.5 69:.5 67 64:3 67:1.5 69:.5 67 64:3 74:2 74 71:3 72:2 72 67:3 69:2 69 72:1.5 71:.5 69 67:1.5 69:.5 67 64:3 69:2 69 72:1.5 71:.5 69 67:1.5 69:.5 67 64:3 74:2 74 77:1.5 74:.5 71 72:3 76:3 72:3 67:1.5 64:.5 67 65:1.5 62:.5 60:3'}
  ]},
- {t:'Nivel 5 · Ritmo',d:'Duraciones de las notas',clef:'t',lessons:[
+ {t:'Nivel 6 · Ritmo',d:'Duraciones de las notas',clef:'t',lessons:[
   {id:'e1',t:'Negras y blancas',info:'<b>Negra</b>: 1 pulso. <b>Blanca</b>: 2 pulsos. <b>Redonda</b>: 4 pulsos. Pulsa "Escuchar" y cuenta los pulsos con el pie.',s:'60 60 62:2 64 64 65:2 67:4'},
   {id:'e2',t:'Corcheas',info:'La <b>corchea</b> dura medio pulso: dos corcheas caben en una negra. Se escribe con un rabito.',s:'60:.5 62:.5 64:.5 65:.5 67 67 69:.5 67:.5 65:.5 64:.5 62 60'},
   {id:'e3',t:'Puntillo',info:'Un punto después de la nota suma la mitad de su duración. Negra con punto = 1 pulso y medio.',s:'60:1.5 62:.5 64:1.5 65:.5 67:2 67:1.5 65:.5 64:1.5 62:.5 60:2'}
+ ]},
+ {t:'Nivel 7 · Compases y posiciones',d:'Como en tu libro: compases, posición de la mano y dedos escritos encima',clef:'t',lessons:[
+  {id:'g1',ts:'3/4',t:'Posición Do · compás de 3/4',info:'Ahora la partitura tiene <b>barras de compás</b>. En 3/4 caben <b>3 pulsos</b> en cada compás. Pon la mano derecha en <b>posición Do</b>: pulgar (1) en Do y un dedo por tecla. Los números grises de arriba son los <b>dedos</b>.',s:'60 64 60 62 65 62 64 67 64 60:3',fg:'1 3 1 2 4 2 3 5 3 1'},
+  {id:'g2',ts:'4/4',t:'Posición Sol · compás de 4/4',info:'La mano se mueve a la <b>posición Sol</b>: el pulgar (1) en Sol y el meñique (5) en Re. En 4/4 caben <b>4 pulsos</b> por compás. Mira cómo el dedo 1 queda ahora en otra tecla.',s:'67 69 71 72 72 71 69 67 71 74 72 69 67:4',fg:'1 2 3 4 4 3 2 1 3 5 4 2 1'},
+  {id:'g3',ts:'4/4',t:'Intervalo de 4ª',info:'Una <b>4ª</b> es un salto en el que te saltas <b>dos teclas blancas</b> (Do→Fa). En la partitura va de línea a espacio, o de espacio a línea, con una línea o espacio en medio. Toca despacio y mira dónde cae cada salto.',s:'60 65 62 67 64 69 67 72 72 67 69 64 67 62 65 60'},
+  {id:'g4',ts:'3/4',t:'Intervalo de 5ª',info:'Una <b>5ª</b> es un salto mayor: te saltas <b>tres teclas blancas</b> (Do→Sol). En el pentagrama va de línea a línea o de espacio a espacio. Es el salto de tu ejercicio 1-5.',s:'60 67 60 62 69 62 64 71 64 60:3'}
+ ]},
+ {t:'Nivel 8 · Izquierda con compás',d:'Clave de Fa: posición de la mano izquierda (M.I.)',clef:'b',lessons:[
+  {id:'m1',ts:'3/4',t:'Posición Do (M.I.)',info:'<b>Mano izquierda, posición Do</b>: el meñique (5) en el Do grave y el pulgar (1) en Sol. Sube y baja por las cinco teclas siguiendo los dedos de arriba.',s:'55 53 52 50 48 50 52 53 55 48:3',fg:'1 2 3 4 5 4 3 2 1 5'},
+  {id:'m2',ts:'4/4',t:'Oda a la alegría (izq.)',info:'La melodía de Beethoven, ahora con la <b>mano izquierda</b> en clave de Fa. Cada línea tiene cuatro compases. Fíjate en los dedos: empieza con el 3 (Mi).',s:'52 52 53 55 55 53 52 50 48 48 50 52 52:1.5 50:.5 50:2 52 52 53 55 55 53 52 50 48 48 50 52 50:1.5 48:.5 48:2',fg:'3 3 2 1 1 2 3 4 5 5 4 3 3 4 4 3 3 2 1 1 2 3 4 5 5 4 3 4 5 5'}
  ]}
 ];
 const ALL=[];
-LEVELS.forEach(lv=>lv.lessons.forEach(l=>{
-  l.clef=lv.clef;l.level=lv.t;
+function prep(l){
   l.n=l.s.split(/\s+/).map(x=>{const p=x.split(':');return {m:+p[0],d:p[1]?+p[1]:1}});
-  ALL.push(l);
-}));
+  const fgs=l.fg?l.fg.split(/\s+/):[];
+  const bpb=l.ts?(+l.ts.split('/')[0])*4/(+l.ts.split('/')[1]):0;let acc=0;
+  l.n.forEach((o,i)=>{o.f=fgs[i]||'';o.bar=!!(bpb&&i>0&&Math.abs(acc%bpb)<1e-6);acc+=o.d});
+  l.bpb=bpb;
+}
+LEVELS.forEach(lv=>lv.lessons.forEach(l=>{l.clef=lv.clef;l.level=lv.t;prep(l);ALL.push(l)}));
+
+/* ---------- CANCIONES (siempre abiertas, de fácil a difícil) ---------- */
+const SONGS=[
+ {id:'s1',kind:'song',clef:'t',ts:'4/4',t:'Pan caliente',lv:1,info:'Canción tradicional (Hot Cross Buns). Solo tres notas: Mi, Re y Do. Al final hay ocho corcheas seguidas: tócalas parejas.',s:'64 62 60:2 64 62 60:2 60:.5 60:.5 60:.5 60:.5 62:.5 62:.5 62:.5 62:.5 64 62 60:2'},
+ {id:'s2',kind:'song',clef:'t',ts:'4/4',t:'Remando suave (Lightly Row)',lv:1,info:'Canción tradicional. Empieza en Sol y baja poco a poco. Fíjate en las blancas del final de cada frase.',s:'67 64 64:2 65 62 62:2 60 62 64 65 67 67 67:2'},
+ {id:'s3',kind:'song',clef:'t',ts:'4/4',t:'Old MacDonald (primera frase)',lv:2,info:'La primera frase de la canción de la granja. Hay un salto de Sol a Re y otro de Re a Si: mira cómo cambian en la partitura.',s:'67 67 67 62 64 64 62:2 71 71 69 69 67:4'},
+ {id:'s4',kind:'song',clef:'t',ts:'4/4',t:'Puente de Londres',lv:2,info:'Canción tradicional (London Bridge). Tiene una nota con puntillo al principio y se repite la frase. Cuenta los pulsos con calma.',s:'67:1.5 69:.5 67 65 64 65 67:2 62 64 65:2 64 65 67:2 67:1.5 69:.5 67 65 64 65 67:2 62 67 64 60'}
+];
+SONGS.forEach(l=>prep(l));
+
+/* ---------- JUEGOS (notas al azar cada vez) ---------- */
+const WT=[60,62,64,65,67,69,71,72,74,76],WB=[48,50,52,53,55,57,59,60,62,64],WI=[60,62,64,65,67,69,71,72,74,76,77,79];
+function rnd(a){return a[Math.floor(Math.random()*a.length)]}
+function genNotes(list,n){const o=[];let last=-1;for(let i=0;i<n;i++){let m=rnd(list);if(m===last)m=rnd(list);o.push(m);last=m}return o.join(' ')}
+function genLeaps(n){
+  let i=Math.floor(Math.random()*6),o=[WI[i]];
+  while(o.length<n){
+    const st=(Math.random()<.5?3:4)*(Math.random()<.5?-1:1);let j=i+st;
+    if(j<0||j>=WI.length)j=i-st;
+    if(j<0||j>=WI.length)continue;
+    i=j;o.push(WI[i]);
+  }
+  return o.join(' ');
+}
+const GAMES=[
+ {id:'gr_t',kind:'game',clef:'t',t:'Lectura en clave de Sol',info:'Te salen 16 notas al azar en el pentagrama. Tócalas lo más rápido que puedas sin fallar: la puntuación es el tiempo más 2 segundos por error (cuanto menos, mejor).',gen:()=>genNotes(WT,16)},
+ {id:'gr_b',kind:'game',clef:'b',t:'Lectura en clave de Fa',info:'Lo mismo pero con las notas graves de la mano izquierda. Tócalas rápido y sin fallar: puntuación = tiempo + 2 s por error.',gen:()=>genNotes(WB,16)},
+ {id:'gr_i',kind:'game',clef:'t',t:'Saltos de 4ª y 5ª',info:'Cada nota salta una 4ª o una 5ª (arriba o abajo) respecto a la anterior. Entrena el ojo para los intervalos. Puntuación = tiempo + 2 s por error.',gen:()=>genLeaps(14)}
+];
+GAMES.forEach(g=>{g.s=g.gen();prep(g)});
+
+/* ---------- TEORÍA ---------- */
+const THEORY=[
+ {t:'Las notas y el teclado',h:'Hay 7 notas: <b>do, re, mi, fa, sol, la, si</b>. Luego se repiten más agudas. En el teclado, el <b>Do</b> es la tecla blanca justo a la izquierda de cada grupo de <b>dos</b> teclas negras. Las teclas de la izquierda suenan más graves y las de la derecha más agudas.'},
+ {t:'El pentagrama y las claves',h:'El <b>pentagrama</b> tiene 5 líneas y 4 espacios. La <b>clave de Sol</b> se usa para las notas agudas (mano derecha). La <b>clave de Fa</b> es para las graves (mano izquierda). Cuanto más arriba está la nota en el pentagrama, más aguda suena.'},
+ {t:'Duración de las notas',h:'<b>Redonda</b> = 4 pulsos, <b>blanca</b> = 2, <b>negra</b> = 1, <b>corchea</b> = medio. Un <b>punto</b> junto a la nota suma la mitad de su valor: una negra con punto dura 1 pulso y medio.'},
+ {t:'Compases: 4/4 y 3/4',h:'Las <b>barras</b> dividen la música en compases. El número de arriba dice cuántos pulsos hay en cada compás: en <b>4/4</b> caben 4 negras y en <b>3/4</b>, 3 (como un vals). Cuenta "1-2-3-4" o "1-2-3" mientras tocas.'},
+ {t:'Intervalos: 2ª, 3ª, 4ª, 5ª',h:'Un <b>intervalo</b> es la distancia entre dos notas. Una <b>2ª</b> es la tecla blanca de al lado. Una <b>3ª</b> salta una tecla, una <b>4ª</b> salta dos y una <b>5ª</b> salta tres. En el pentagrama, 2ª y 4ª van de línea a espacio, y 3ª y 5ª de línea a línea o de espacio a espacio.'},
+ {t:'Dedos y posición de la mano',h:'Los dedos se numeran del 1 al 5: <b>1 = pulgar</b>, 2 = índice, 3 = corazón, 4 = anular, 5 = meñique. En <b>posición Do</b>, el pulgar de la mano derecha está en Do y cada dedo toca una tecla. Mantén la muñeca relajada y los dedos curvados.'}
+];
 
 const $=id=>document.getElementById(id);
-let store={stars:{},last:'',streak:0,lab:true,hint:true};
+let store={stars:{},best:{},last:'',streak:0,lab:true,hint:true,sens:10,fall:false};
 try{const s=localStorage.getItem('pf2');if(s)store=Object.assign(store,JSON.parse(s))}catch(e){}
 function save(){try{localStorage.setItem('pf2',JSON.stringify(store))}catch(e){}}
 const today=()=>new Date().toLocaleDateString('sv');
 
-let L=null,idx=0,errors=0,mode='tap',micOn=false,demoing=false,lastErr=0,LO=60,HI=83;
+let curTab='curso',t0=0,L=null,idx=0,errors=0,mode='tap',micOn=false,demoing=false,lastErr=0,LO=60,HI=83;
 
 /* ---------- audio ---------- */
 let ac=null;
@@ -170,41 +295,60 @@ function tone(m,dur){dur=dur||.5;try{const c=ctx(),o=c.createOscillator(),g=c.cr
 function stars(n){let s='';for(let i=1;i<=3;i++)s+=i<=n?'★':'<span class="off">★</span>';return s}
 function unlocked(i){return i===0||(store.stars[ALL[i-1].id]||0)>0}
 function nextIdx(){for(let i=0;i<ALL.length;i++)if(!(store.stars[ALL[i].id]||0))return i;return 0}
+function card(title,sub,right,onclick){
+  const d=document.createElement('div');d.className='card lesson'+(onclick?'':' lock');
+  d.innerHTML='<div><b>'+title+'</b><small>'+sub+'</small></div><div class="stars">'+right+'</div>';
+  if(onclick)d.onclick=onclick;return d;
+}
+function showTab(t){
+  curTab=t;
+  document.querySelectorAll('.tab').forEach(b=>b.className='tab'+(b.dataset.t===t?' act':''));
+  ['curso','juegos','canciones','teoria'].forEach(x=>$('t_'+x).classList.toggle('hide',x!==t));
+}
 function home(){
-  stopMic();setMode('tap');demoing=false;
+  stopMic();setMode('tap');demoing=false;document.documentElement.classList.remove('playing');window.scrollTo(0,0);
   $('play').classList.add('hide');$('home').classList.remove('hide');
   const tot=Object.values(store.stars).reduce((a,b)=>a+b,0);
   $('stat').textContent='🔥 '+store.streak+' · ⭐ '+tot;
   const nx=ALL[nextIdx()];
   $('cont').textContent='▶ Continuar: '+nx.t;
   $('list').innerHTML='';
-  let k=0;
   LEVELS.forEach(lv=>{
     const h=document.createElement('div');
     h.innerHTML='<h2>'+lv.t+'</h2><p class="lvl">'+lv.d+'</p>';$('list').appendChild(h);
     lv.lessons.forEach(l=>{
       const i=ALL.indexOf(l),ok=unlocked(i);
-      const d=document.createElement('div');d.className='card lesson'+(ok?'':' lock');
-      d.innerHTML='<div><b>'+l.t+'</b><small>'+l.n.length+' notas</small></div><div class="stars">'+(ok?stars(store.stars[l.id]||0):'🔒')+'</div>';
-      if(ok)d.onclick=()=>open(l);
-      $('list').appendChild(d);
+      $('list').appendChild(card(l.t,l.n.length+' notas',ok?stars(store.stars[l.id]||0):'🔒',ok?()=>open(l):null));
     });
   });
+  const tj=$('t_juegos');tj.innerHTML='<h2>🎮 Juegos de práctica</h2><p class="lvl">Notas distintas cada vez. Mejora tu récord.</p>';
+  GAMES.forEach(g=>{
+    const bst=store.best[g.id];
+    tj.appendChild(card(g.t,bst?('Récord: '+bst.toFixed(1)+' s'):'Sin récord todavía',stars(store.stars[g.id]||0),()=>open(g)));
+  });
+  const ts=$('t_canciones');ts.innerHTML='<h2>🎵 Canciones fáciles</h2><p class="lvl">De más fácil a más difícil. Todas abiertas.</p>';
+  SONGS.forEach(g=>ts.appendChild(card(g.t,'Dificultad '+'●'.repeat(g.lv)+'○'.repeat(3-g.lv)+' · '+g.n.length+' notas',stars(store.stars[g.id]||0),()=>open(g))));
+  const tt=$('t_teoria');tt.innerHTML='<h2>🎓 Teoría en tarjetas</h2><p class="lvl">Pulsa una tarjeta para leerla.</p>';
+  THEORY.forEach(x=>{const d=document.createElement('div');d.className='card theory';d.innerHTML='<details><summary><b>'+x.t+'</b></summary><div class="tx">'+x.h+'</div></details>';tt.appendChild(d)});
+  showTab(curTab);
 }
 
 /* ---------- partitura ---------- */
 const BOT={t:37,b:25};
 function dn(m){return Math.floor(m/12)*7+WPC.indexOf(m%12)}
 function xsOf(n){
-  const xs=[];let x=64;
-  n.forEach(o=>{xs.push(x);x+=(o.d>=4?72:o.d>=2?58:o.d>=1?46:o.d>=.5?38:34)+(isDot(o.d)?8:0)});
-  return {xs:xs,w:x+40};
+  const xs=[],bars=[];let x=L&&L.ts?84:64;
+  n.forEach(o=>{if(o.bar){x+=20;bars.push(x-26)}xs.push(x);x+=(o.d>=4?72:o.d>=2?58:o.d>=1?46:o.d>=.5?38:34)+(isDot(o.d)?8:0)});
+  return {xs:xs,bars:bars,w:x+40};
 }
 function isDot(d){return d===1.5||d===3||d===.75||d===.375}
 function staffSvg(){
   const n=L.n,r=xsOf(n),xs=r.xs,H=172,yb=112,col=L.clef;
   let s='<svg xmlns="http://www.w3.org/2000/svg" width="'+r.w+'" height="'+H+'" viewBox="0 0 '+r.w+' '+H+'">';
   for(let i=0;i<5;i++){const y=yb-i*10;s+='<line x1="0" x2="'+r.w+'" y1="'+y+'" y2="'+y+'" stroke="#374151" stroke-width="1"/>'}
+  if(L.ts){const q=L.ts.split('/');s+='<text x="42" y="'+(yb-22)+'" font-size="22" font-weight="800" fill="#111827" font-family="serif" text-anchor="middle">'+q[0]+'</text><text x="42" y="'+(yb-2)+'" font-size="22" font-weight="800" fill="#111827" font-family="serif" text-anchor="middle">'+q[1]+'</text>'}
+  r.bars.forEach(bx=>{s+='<line x1="'+bx+'" x2="'+bx+'" y1="'+(yb-40)+'" y2="'+yb+'" stroke="#374151" stroke-width="1.4"/>'});
+  if(L.ts){const ex=xs[xs.length-1]+30;s+='<line x1="'+ex+'" x2="'+ex+'" y1="'+(yb-40)+'" y2="'+yb+'" stroke="#111827" stroke-width="1.4"/><line x1="'+(ex+4)+'" x2="'+(ex+4)+'" y1="'+(yb-40)+'" y2="'+yb+'" stroke="#111827" stroke-width="4"/>'}
   s+='<text x="8" y="'+(yb-16)+'" font-size="13" font-weight="700" fill="#6d28d9" font-family="sans-serif">'+(col==='t'?'Sol':'Fa')+'</text>';
   n.forEach((o,i)=>{
     const p=dn(o.m)-BOT[col],y=yb-p*5,x=xs[i];
@@ -222,6 +366,7 @@ function staffSvg(){
       }
     }
     if(isDot(o.d))s+='<circle cx="'+(x+12)+'" cy="'+(p%2===0?y-5:y)+'" r="2" fill="'+c+'"/>';
+    if(o.f)s+='<text x="'+x+'" y="16" text-anchor="middle" font-size="14" font-weight="700" fill="'+(i===idx?'#6d28d9':'#9ca3af')+'" font-family="sans-serif">'+o.f+'</text>';
     if(store.lab){
       const wi=WPC.indexOf(o.m%12);
       s+='<text x="'+x+'" y="150" text-anchor="middle" font-size="14" font-weight="700" fill="'+c+'" font-family="sans-serif">'+(wi+1)+(o.m>=72?'•':'')+'</text>';
@@ -233,7 +378,8 @@ function staffSvg(){
 function drawStaff(){
   const b=$('staffbox');b.innerHTML=staffSvg();
   const xs=xsOf(L.n).xs,x=xs[Math.min(idx,xs.length-1)];
-  b.scrollLeft=Math.max(0,x-b.clientWidth/3);
+  const sv=b.querySelector('svg'),sc=sv?sv.getBoundingClientRect().height/172:1;
+  b.scrollLeft=Math.max(0,x*sc-b.clientWidth/3);
 }
 
 /* ---------- teclado ---------- */
@@ -283,17 +429,43 @@ function mark(){
   }
 }
 
+/* ---------- cascada de notas ---------- */
+function buildFall(){
+  const f=$('fall');f.innerHTML='';
+  L.n.forEach((o,i)=>{
+    const col=dn(o.m)-dn(LO),e=document.createElement('div');
+    e.className='fb';e.style.left=(col/14*100+.2)+'%';e.style.width=(100/14-.4)+'%';
+    e.style.height=(o.d>=2?44:o.d>=1?30:20)+'px';e.style.bottom='-80px';e.style.opacity='0';
+    e.textContent=WPC.indexOf(o.m%12)+1;f.appendChild(e);
+  });
+}
+function updFall(){
+  const f=$('fall');if(!store.fall||!L)return;
+  const H=f.clientHeight||150,step=H/4.3;
+  Array.prototype.forEach.call(f.children,(e,i)=>{
+    const k=i-idx;
+    if(k<0){e.style.bottom='-80px';e.style.opacity='0'}
+    else{e.style.bottom=(4+k*step)+'px';e.style.opacity=k>3?'0':'1'}
+    e.classList.toggle('cur',k===0);
+  });
+}
+function applyFall(){
+  $('sw').classList.toggle('hide',!!store.fall);$('fall').classList.toggle('hide',!store.fall);
+  if(store.fall)updFall();else if(L)drawStaff();
+}
+
 /* ---------- lección ---------- */
 function open(l){
-  L=l;idx=0;errors=0;
+  if(l.gen){l.s=l.gen();prep(l)}
+  L=l;idx=0;errors=0;t0=0;curTab=l.kind==='game'?'juegos':l.kind==='song'?'canciones':'curso';$('infoD').open=false;document.documentElement.classList.add('playing');window.scrollTo(0,0);
   LO=l.clef==='b'?48:60;HI=LO+23;
   $('home').classList.add('hide');$('play').classList.remove('hide');$('res').classList.add('hide');
   $('ttl').textContent=l.t;$('info').innerHTML=l.info;
-  $('oLab').checked=!!store.lab;$('oHint').checked=!!store.hint;
-  buildKb();setMode(mode);msg('','');refresh();
+  $('oLab').checked=!!store.lab;$('oHint').checked=!!store.hint;$('oFall').checked=!!store.fall;
+  buildKb();buildFall();applyFall();setMode(mode);msg('','');refresh();
 }
 function refresh(){
-  drawStaff();
+  if(!store.fall)drawStaff();else updFall();
   if(idx<L.n.length){
     const m=L.n[idx].m,wi=WPC.indexOf(m%12);
     $('bn').textContent=wi+1;$('bnm').textContent=NAMES[wi]+(m>=72?' (aguda)':'');
@@ -304,6 +476,7 @@ function msg(t,c){const e=$('msg');e.textContent=t;e.className='msg '+(c||'')}
 function evalPc(pc){
   if(!L||idx>=L.n.length||demoing)return;
   const tg=L.n[idx].m;
+  if(L.kind==='game'&&!t0)t0=Date.now();
   if(pc===tg%12){
     flash(pc,'good');
     idx++;msg('¡Bien!','ok');
@@ -314,7 +487,6 @@ function evalPc(pc){
   }
 }
 function finish(){
-  stopMic();
   const per=errors/L.n.length,s=per<=.1?3:per<=.3?2:1;
   if(s>(store.stars[L.id]||0))store.stars[L.id]=s;
   const t=today();
@@ -323,12 +495,21 @@ function finish(){
     store.streak=(store.last===y)?store.streak+1:1;store.last=t;
   }
   save();
-  const i=ALL.indexOf(L),nx=ALL[i+1];
-  $('res').innerHTML='<div class="stars">'+stars(s)+'</div><h2 style="margin:6px 0">¡Lección completada!</h2><p class="note">Errores: '+errors+(nx?'':' · ¡Has terminado todo el curso!')+'</p><div class="row"><button class="sec" id="again">Repetir</button>'+(nx?'<button id="next">Siguiente →</button>':'<button id="menu">Ver curso</button>')+'</div>';
+  const lst=L.kind==='song'?SONGS:L.kind==='game'?null:ALL;
+  const nx=lst?lst[lst.indexOf(L)+1]:null;
+  let extra='Errores: '+errors+(lst&&!nx?' · ¡Has terminado todo!':'');
+  if(L.kind==='game'){
+    const tm=(Date.now()-t0)/1000,sc=tm+2*errors,old=store.best[L.id];
+    const rec=!old||sc<old;if(rec){store.best[L.id]=sc;save()}
+    extra='⏱ '+tm.toFixed(1)+' s · Errores: '+errors+'<br><b>Puntuación: '+sc.toFixed(1)+'</b>'+(rec?' 🏆 ¡Nuevo récord!':' · Récord: '+old.toFixed(1));
+  }
+  let btns='<button class="sec" id="again">'+(L.kind==='game'?'Jugar otra vez':'Repetir')+'</button>';
+  btns+=(L.kind==='game')?'<button id="menu">Ver juegos</button>':nx?'<button id="next">Siguiente →</button>':'<button id="menu">Volver</button>';
+  $('res').innerHTML='<div class="stars">'+stars(s)+'</div><h2 style="margin:6px 0">'+(L.kind==='game'?'¡Reto completado!':'¡Lección completada!')+'</h2><p class="note">'+extra+'</p><div class="row">'+btns+'</div>';
   $('res').classList.remove('hide');
   $('again').onclick=()=>open(L);
-  if(nx)$('next').onclick=()=>open(nx);else $('menu').onclick=home;
-  $('res').scrollIntoView({behavior:'smooth'});
+  if($('next'))$('next').onclick=()=>open(nx);
+  if($('menu'))$('menu').onclick=home;
 }
 
 /* ---------- escuchar ---------- */
@@ -350,15 +531,23 @@ async function startMic(){
   try{
     if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw new Error('no');
     stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}});
-    const c=ctx(),src=c.createMediaStreamSource(stream);
-    an=c.createAnalyser();an.fftSize=2048;src.connect(an);buf=new Float32Array(an.fftSize);
+    const c=ctx();try{await c.resume()}catch(e){}
+    const src=c.createMediaStreamSource(stream);
+    an=c.createAnalyser();an.fftSize=2048;an.smoothingTimeConstant=0;
+    src.connect(an);
+    /* algunos móviles no "tiran" del micrófono si el analizador no llega al destino: lo conectamos mudo */
+    const mute=c.createGain();mute.gain.value=0;an.connect(mute);mute.connect(c.destination);
+    buf=new Float32Array(an.fftSize);
+    floor=.002;quiet=0;
     timer=setInterval(listen,50);micOn=true;return true;
   }catch(e){micOn=false;return false}
 }
 function stopMic(){
   clearInterval(timer);timer=null;
   if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}
-  micOn=false;heardMidi=null;clearHeard();if($('hear'))$('hear').textContent='';
+  micOn=false;heardMidi=null;clearHeard();
+  if($('hear'))$('hear').textContent='';
+  if($('meter'))$('meter').classList.add('hide');
 }
 function pitch(b,sr){
   const n=b.length,maxLag=Math.min(n-1,Math.floor(sr/60)),c=new Float32Array(maxLag+2);
@@ -373,13 +562,24 @@ function pitch(b,sr){
   if(a)T=T-bb/(2*a);
   return sr/T;
 }
+let floor=.002,quiet=0;
+function thrNow(){return Math.max(.02/(store.sens||10),Math.min(floor*3,.03))}
 function listen(){
   if(demoing||!an)return;
   an.getFloatTimeDomainData(buf);
   let s=0;for(let i=0;i<buf.length;i++)s+=buf[i]*buf[i];
-  const rms=Math.sqrt(s/buf.length);
-  if(rms<.012){lastPc=-1;stable=0;cand=-1;prevRms=rms;heardMidi=null;showHeard(-1);$('hear').textContent='🎧 Escuchando…';return}
-  const onset=rms>prevRms*1.5;prevRms=rms;
+  const rms=Math.sqrt(s/buf.length),thr=thrNow();
+  const mi=$('mi');if(mi){mi.style.width=Math.min(100,rms/thr*25)+'%';mi.className=rms>=thr?'on':''}
+  /* el ruido de fondo baja rápido y sube muy despacio, así la cola de una nota no lo contamina */
+  floor=rms<floor?Math.max(.0004,floor*.8+rms*.2):Math.min(.03,floor*1.004);
+  if(rms<thr){
+    lastPc=-1;stable=0;cand=-1;prevRms=rms;pend=0;heardMidi=null;showHeard(-1);
+    quiet++;
+    $('hear').textContent=quiet>120?'🎧 No te oigo: acerca el móvil al teclado, sube su volumen o la sensibilidad':'🎧 Escuchando…';
+    return;
+  }
+  quiet=0;
+  const onset=rms>prevRms*1.25;prevRms=rms;
   const f=pitch(buf,ac.sampleRate);
   const m=f>0?Math.round(69+12*Math.log2(f/440)):-1;
   const pc=m>=0?((m%12)+12)%12:-1;
@@ -387,13 +587,16 @@ function listen(){
   $('hear').textContent=pc>=0?('🎧 Tocas: '+PCN[pc]+' · '+Math.round(f)+' Hz'):'🎧 …';
   if(onset)pend=3;
   if(pc===cand)stable++;else{cand=pc;stable=1}
-  if(pend>0){pend--;if(pend===0&&pc>=0){lastPc=pc;evalPc(pc)}return}
-  if(pc>=0&&stable>=3&&pc!==lastPc){lastPc=pc;evalPc(pc)}
+  /* tras un golpe de tecla, se evalúa en cuanto hay una nota clara */
+  if(pend>0){pend--;if(pend<=1&&pc>=0){pend=0;lastPc=pc;evalPc(pc)}return}
+  /* si una nota anterior sigue sonando, basta con que la nueva se mantenga 2 lecturas */
+  if(pc>=0&&stable>=(lastPc<0?3:2)&&pc!==lastPc){lastPc=pc;evalPc(pc)}
 }
 
 /* ---------- controles ---------- */
 function setMode(m){
   mode=m;$('mTap').className=m==='tap'?'on':'sec';$('mMic').className=m==='mic'?'on':'sec';
+  $('meter').classList.toggle('hide',m!=='mic');
 }
 $('mTap').onclick=()=>{stopMic();setMode('tap');$('warn').classList.add('hide')};
 $('mMic').onclick=async()=>{
@@ -411,6 +614,10 @@ $('back').onclick=()=>{demoing=false;home()};
 $('cont').onclick=()=>open(ALL[nextIdx()]);
 $('oLab').onchange=e=>{store.lab=e.target.checked;save();if(L)drawStaff()};
 $('oHint').onchange=e=>{store.hint=e.target.checked;save();if(L)mark()};
+$('oFall').onchange=e=>{store.fall=e.target.checked;save();applyFall()};
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>showTab(b.dataset.t));
+$('oSens').value=store.sens||10;
+$('oSens').oninput=e=>{store.sens=+e.target.value;save()};
 $('fs').onclick=()=>{
   try{
     const d=document,el=d.documentElement;
