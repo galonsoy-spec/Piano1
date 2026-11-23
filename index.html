@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Piano Fácil</title>
+<style>
+:root{--p:#6d28d9;--p2:#8b5cf6;--bg:#f5f3ff;--ink:#1e1b4b;--ok:#16a34a;--bad:#dc2626;--mut:#6b7280}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+.wrap{max-width:560px;margin:0 auto;padding:14px}
+h1{font-size:22px;margin:0}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.pill{background:#fff;border-radius:999px;padding:6px 12px;font-size:14px;font-weight:600;box-shadow:0 1px 3px #0001}
+.card{background:#fff;border-radius:16px;padding:14px;margin-bottom:10px;box-shadow:0 1px 4px #0001}
+.lesson{display:flex;justify-content:space-between;align-items:center;cursor:pointer;border:2px solid transparent}
+.lesson:active{border-color:var(--p2)}
+.lesson b{display:block;font-size:16px}
+.lesson small{color:var(--mut)}
+.stars{font-size:18px;letter-spacing:1px;color:#f59e0b;white-space:nowrap}
+.stars .off{color:#d1d5db}
+button{font:inherit;border:0;border-radius:12px;padding:10px 14px;background:var(--p);color:#fff;font-weight:600;cursor:pointer}
+button.sec{background:#ede9fe;color:var(--p)}
+button.on{background:var(--ok);color:#fff}
+button:disabled{opacity:.5}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.row>button{flex:1}
+.strip{display:flex;gap:6px;overflow-x:auto;padding:4px 2px 8px;scroll-behavior:smooth}
+.chip{flex:0 0 auto;min-width:44px;text-align:center;background:#f3f4f6;border-radius:10px;padding:4px 6px;position:relative}
+.chip b{font-size:18px;display:block;line-height:1.1}
+.chip small{font-size:11px;color:var(--mut)}
+.chip .dot{position:absolute;top:-1px;left:0;right:0;font-size:10px;line-height:8px;color:var(--p)}
+.chip.done{background:#dcfce7;opacity:.7}
+.chip.now{background:var(--p);color:#fff;transform:scale(1.08)}
+.chip.now small{color:#ddd6fe}
+.big{text-align:center;margin:6px 0 10px}
+.big .n{font-size:64px;font-weight:800;line-height:1;color:var(--p)}
+.big .nm{font-size:22px;font-weight:700}
+.big .msg{min-height:22px;font-size:14px;color:var(--mut);margin-top:4px}
+.big .msg.bad{color:var(--bad)}
+.big .msg.ok{color:var(--ok)}
+.kb{position:relative;display:flex;height:170px;user-select:none;touch-action:manipulation;margin:6px 0 10px}
+.w{flex:1;background:#fff;border:1px solid #9ca3af;border-radius:0 0 8px 8px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding-bottom:6px;font-weight:700;font-size:15px;position:relative}
+.w small{font-size:9px;color:var(--mut);font-weight:500}
+.bk{position:absolute;top:0;width:6.4%;height:62%;background:#111827;border-radius:0 0 6px 6px;z-index:2}
+.w.t2{background:#ede9fe}
+.w.t,.bk.t{background:var(--p2);color:#fff;box-shadow:0 0 0 3px #c4b5fd inset}
+.w.t small{color:#ede9fe}
+.w.press,.bk.press{background:#fde68a}
+.w.good{background:#86efac}
+.w.err{background:#fca5a5}
+.hear{font-size:13px;color:var(--mut);text-align:center;min-height:18px}
+.note{font-size:13px;color:var(--mut);line-height:1.4}
+.hide{display:none}
+.res{text-align:center}
+.res .stars{font-size:40px}
+.warn{background:#fef3c7;color:#92400e;border-radius:10px;padding:8px 10px;font-size:13px;margin-bottom:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div id="home">
+  <div class="top"><h1>🎹 Piano Fácil</h1><div class="pill" id="stat"></div></div>
+  <div class="card note">Pensada para tu teclado con pegatinas: los números <b>1–7</b> y los nombres <b>do-re-mi</b> de la pantalla son los mismos que los de tus teclas. Elige una lección.</div>
+  <div id="list"></div>
+</div>
+
+<div id="play" class="hide">
+  <div class="top">
+    <button class="sec" id="back">← Lecciones</button>
+    <div class="pill" id="ttl"></div>
+  </div>
+  <div class="card">
+    <div class="strip" id="strip"></div>
+    <div class="big"><div class="n" id="bn">–</div><div class="nm" id="bnm"></div><div class="msg" id="msg"></div></div>
+    <div class="kb" id="kb"></div>
+    <div class="hear" id="hear"></div>
+  </div>
+  <div class="card">
+    <div class="row" style="margin-bottom:8px">
+      <button class="sec" id="mTap">👆 Pantalla</button>
+      <button class="sec" id="mMic">🎤 Micrófono</button>
+    </div>
+    <div class="warn hide" id="warn"></div>
+    <div class="row">
+      <button class="sec" id="demo">🔊 Escuchar</button>
+      <button class="sec" id="reset">↺ Reiniciar</button>
+    </div>
+    <p class="note" style="margin:10px 0 0">Toca la tecla marcada en morado. El punto <b style="color:var(--p)">•</b> sobre un número indica una octava más aguda; en tu teclado vale cualquier "do", "re"… de cualquier octava. Con el micrófono, pon el móvil cerca del teclado y toca despacio.</p>
+  </div>
+  <div class="card res hide" id="res"></div>
+</div>
+
+</div>
+
+<script>
+const NAMES=['do','re','mi','fa','sol','la','si'];
+const WPC=[0,2,4,5,7,9,11];
+const PCN=['do','do♯','re','re♯','mi','fa','fa♯','sol','sol♯','la','la♯','si'];
+const LESSONS=[
+ {id:'l1',t:'1 · Do Re Mi Fa Sol',d:'Las 5 primeras notas',n:[60,62,64,65,67,65,64,62,60]},
+ {id:'l2',t:'2 · La escala completa',d:'Do a Do, subiendo y bajando',n:[60,62,64,65,67,69,71,72,71,69,67,65,64,62,60]},
+ {id:'l3',t:'3 · Estrellita',d:'Estrellita, ¿dónde estás?',n:[60,60,67,67,69,69,67,65,65,64,64,62,62,60,67,67,65,65,64,64,62,67,67,65,65,64,64,62,60,60,67,67,69,69,67,65,65,64,64,62,62,60]},
+ {id:'l4',t:'4 · Fray Santiago',d:'Canon clásico',n:[60,62,64,60,60,62,64,60,64,65,67,64,65,67,67,69,67,65,64,60,67,69,67,65,64,60,60,67,60,60,67,60]},
+ {id:'l5',t:'5 · Oda a la alegría',d:'Beethoven',n:[64,64,65,67,67,65,64,62,60,60,62,64,64,62,62,64,64,65,67,67,65,64,62,60,60,62,64,62,60,60]},
+ {id:'l6',t:'6 · Cumpleaños feliz',d:'Un clásico para tocar',n:[67,67,69,67,72,71,67,67,69,67,74,72,67,67,79,76,72,71,69,77,77,76,72,74,72]},
+ {id:'l7',t:'7 · Jingle Bells',d:'Estribillo',n:[64,64,64,64,64,64,64,67,60,62,64,65,65,65,65,65,64,64,64,64,62,62,64,62,67]}
+];
+const $=id=>document.getElementById(id);
+let store={stars:{},last:'',streak:0};
+try{const s=localStorage.getItem('pf1');if(s)store=Object.assign(store,JSON.parse(s))}catch(e){}
+function save(){try{localStorage.setItem('pf1',JSON.stringify(store))}catch(e){}}
+const today=()=>new Date().toLocaleDateString('sv');
+
+let L=null,idx=0,errors=0,mode='tap',micOn=false,demoing=false,lastErr=0;
+
+/* ---------- audio ---------- */
+let ac=null;
+function ctx(){if(!ac)ac=new (window.AudioContext||window.webkitAudioContext)();if(ac.state==='suspended')ac.resume();return ac}
+function tone(m,dur){dur=dur||.5;try{const c=ctx(),o=c.createOscillator(),g=c.createGain();o.type='triangle';o.frequency.value=440*Math.pow(2,(m-69)/12);g.gain.setValueAtTime(.0001,c.currentTime);g.gain.exponentialRampToValueAtTime(.35,c.currentTime+.02);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+dur);o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+dur+.05)}catch(e){}}
+
+/* ---------- home ---------- */
+function stars(n){let s='';for(let i=1;i<=3;i++)s+=i<=n?'★':'<span class="off">★</span>';return s}
+function home(){
+  stopMic();setMode('tap');
+  $('play').classList.add('hide');$('home').classList.remove('hide');
+  const tot=Object.values(store.stars).reduce((a,b)=>a+b,0);
+  $('stat').textContent='🔥 '+store.streak+' · ⭐ '+tot;
+  $('list').innerHTML='';
+  LESSONS.forEach(l=>{
+    const d=document.createElement('div');d.className='card lesson';
+    d.innerHTML='<div><b>'+l.t+'</b><small>'+l.d+' · '+l.n.length+' notas</small></div><div class="stars">'+stars(store.stars[l.id]||0)+'</div>';
+    d.onclick=()=>open(l);$('list').appendChild(d);
+  });
+}
+
+/* ---------- keyboard ---------- */
+const LO=60,HI=83;
+function buildKb(){
+  const kb=$('kb');kb.innerHTML='';let wc=0;
+  for(let m=LO;m<=HI;m++){
+    const wi=WPC.indexOf(m%12);
+    const k=document.createElement('div');k.dataset.m=m;
+    if(wi>=0){
+      k.className='w';k.innerHTML='<span>'+(wi+1)+'</span><small>'+NAMES[wi]+'</small>';wc++;
+    }else{
+      k.className='bk';k.style.left=(wc/14*100-3.2)+'%';
+    }
+    k.addEventListener('pointerdown',e=>{e.preventDefault();press(m,k)});
+    kb.appendChild(k);
+  }
+}
+function press(m,el){
+  if(demoing||!L)return;
+  el.classList.add('press');setTimeout(()=>el.classList.remove('press'),150);
+  if(mode==='tap')tone(m);
+  evalPc(m%12);
+}
+function keyEl(m){return document.querySelector('#kb [data-m="'+m+'"]')}
+function mark(){
+  document.querySelectorAll('#kb .t,#kb .t2').forEach(e=>e.classList.remove('t','t2'));
+  if(!L||idx>=L.n.length)return;
+  const tg=L.n[idx];
+  for(let m=LO;m<=HI;m++){
+    if(m%12===tg%12){const e=keyEl(m);if(e)e.classList.add(m===tg?'t':'t2')}
+  }
+}
+
+/* ---------- lesson ---------- */
+function chipHtml(m,i){
+  const wi=WPC.indexOf(m%12);
+  return '<div class="chip" id="c'+i+'">'+(m>=72?'<span class="dot">•</span>':'')+'<b>'+(wi+1)+'</b><small>'+NAMES[wi]+'</small></div>';
+}
+function open(l){
+  L=l;idx=0;errors=0;
+  $('home').classList.add('hide');$('play').classList.remove('hide');$('res').classList.add('hide');
+  $('ttl').textContent=l.t;
+  $('strip').innerHTML=l.n.map(chipHtml).join('');
+  buildKb();setMode(mode);msg('','');refresh();
+}
+function refresh(){
+  L.n.forEach((m,i)=>{const c=$('c'+i);c.className='chip'+(i<idx?' done':i===idx?' now':'')});
+  const c=$('c'+Math.min(idx,L.n.length-1));if(c)c.scrollIntoView({inline:'center',block:'nearest'});
+  if(idx<L.n.length){
+    const m=L.n[idx],wi=WPC.indexOf(m%12);
+    $('bn').textContent=wi+1;$('bnm').textContent=NAMES[wi]+(m>=72?' (aguda)':'');
+  }
+  mark();
+}
+function msg(t,c){const e=$('msg');e.textContent=t;e.className='msg '+(c||'')}
+function evalPc(pc){
+  if(!L||idx>=L.n.length||demoing)return;
+  const tg=L.n[idx];
+  if(pc===tg%12){
+    const e=keyEl(tg);if(e){e.classList.add('good');setTimeout(()=>e.classList.remove('good'),250)}
+    idx++;msg('¡Bien!','ok');
+    if(idx>=L.n.length){refresh();finish()}else refresh();
+  }else{
+    const now=Date.now();if(now-lastErr<500)return;lastErr=now;errors++;
+    msg('Esa no: era '+NAMES[WPC.indexOf(tg%12)]+(WPC.indexOf(pc)>=0?', tocaste '+NAMES[WPC.indexOf(pc)]:''),'bad');
+  }
+}
+function finish(){
+  stopMic();
+  const s=errors<=2?3:errors<=6?2:1;
+  if(s>(store.stars[L.id]||0))store.stars[L.id]=s;
+  const t=today();
+  if(store.last!==t){
+    const y=new Date(Date.now()-864e5).toLocaleDateString('sv');
+    store.streak=(store.last===y)?store.streak+1:1;store.last=t;
+  }
+  save();
+  const i=LESSONS.indexOf(L),nx=LESSONS[i+1];
+  $('res').innerHTML='<div class="stars">'+stars(s)+'</div><h2 style="margin:6px 0">¡Lección completada!</h2><p class="note">Errores: '+errors+'</p><div class="row"><button class="sec" id="again">Repetir</button>'+(nx?'<button id="next">Siguiente →</button>':'')+'</div>';
+  $('res').classList.remove('hide');
+  $('again').onclick=()=>open(L);
+  if(nx)$('next').onclick=()=>open(nx);
+  $('res').scrollIntoView({behavior:'smooth'});
+}
+
+/* ---------- demo ---------- */
+async function demo(){
+  if(demoing)return;demoing=true;$('demo').disabled=true;
+  const was=micOn;
+  for(let i=0;i<L.n.length&&demoing;i++){
+    const m=L.n[i],e=keyEl(m);
+    if(e)e.classList.add('press');tone(m,.4);
+    await new Promise(r=>setTimeout(r,430));
+    if(e)e.classList.remove('press');
+  }
+  demoing=false;$('demo').disabled=false;
+}
+
+/* ---------- mic ---------- */
+let stream=null,an=null,buf=null,timer=null,prevRms=0,cand=-1,stable=0,lastPc=-1,pend=0;
+async function startMic(){
+  try{
+    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw new Error('no');
+    stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}});
+    const c=ctx(),src=c.createMediaStreamSource(stream);
+    an=c.createAnalyser();an.fftSize=2048;src.connect(an);buf=new Float32Array(an.fftSize);
+    timer=setInterval(listen,50);micOn=true;return true;
+  }catch(e){micOn=false;return false}
+}
+function stopMic(){
+  clearInterval(timer);timer=null;
+  if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}
+  micOn=false;if($('hear'))$('hear').textContent='';
+}
+function pitch(b,sr){
+  const n=b.length,maxLag=Math.min(n-1,Math.floor(sr/70)),c=new Float32Array(maxLag+2);
+  for(let l=0;l<=maxLag;l++){let s=0;for(let j=0;j<n-l;j++)s+=b[j]*b[j+l];c[l]=s}
+  let d=0;while(d<maxLag&&c[d]>c[d+1])d++;
+  let mv=-1;for(let i=d;i<=maxLag;i++)if(c[i]>mv)mv=c[i];
+  if(mv<=0||mv/c[0]<.4)return -1;
+  let mp=-1;
+  for(let i=Math.max(d,1);i<maxLag;i++){if(c[i]>=.9*mv&&c[i]>=c[i-1]&&c[i]>=c[i+1]){mp=i;break}}
+  if(mp<1)return -1;
+  let T=mp;const x1=c[mp-1],x2=c[mp],x3=c[mp+1],a=(x1+x3-2*x2)/2,bb=(x3-x1)/2;
+  if(a)T=T-bb/(2*a);
+  return sr/T;
+}
+function listen(){
+  if(demoing||!an)return;
+  an.getFloatTimeDomainData(buf);
+  let s=0;for(let i=0;i<buf.length;i++)s+=buf[i]*buf[i];
+  const rms=Math.sqrt(s/buf.length);
+  if(rms<.012){lastPc=-1;stable=0;cand=-1;prevRms=rms;$('hear').textContent='🎧 Escuchando…';return}
+  const onset=rms>prevRms*1.5;prevRms=rms;
+  const f=pitch(buf,ac.sampleRate);
+  const m=f>0?Math.round(69+12*Math.log2(f/440)):-1;
+  const pc=m>=0?((m%12)+12)%12:-1;
+  $('hear').textContent=pc>=0?('🎧 Oigo: '+PCN[pc]+' ('+Math.round(f)+' Hz)'):'🎧 …';
+  if(onset)pend=3;
+  if(pc===cand)stable++;else{cand=pc;stable=1}
+  if(pend>0){pend--;if(pend===0&&pc>=0){lastPc=pc;evalPc(pc)}return}
+  if(pc>=0&&stable>=3&&pc!==lastPc){lastPc=pc;evalPc(pc)}
+}
+
+/* ---------- mode ---------- */
+function setMode(m){
+  mode=m;$('mTap').className=m==='tap'?'on':'sec';$('mMic').className=m==='mic'?'on':'sec';
+}
+$('mTap').onclick=()=>{stopMic();setMode('tap');$('warn').classList.add('hide')};
+$('mMic').onclick=async()=>{
+  const ok=await startMic();
+  if(ok){setMode('mic');$('warn').classList.add('hide');$('hear').textContent='🎧 Escuchando…'}
+  else{
+    setMode('tap');
+    $('warn').textContent='No se pudo usar el micrófono aquí (la vista previa de Claude lo bloquea, o no diste permiso). Ábrela desde tu propio alojamiento o como archivo en el navegador, o sigue con el modo pantalla.';
+    $('warn').classList.remove('hide');
+  }
+};
+$('demo').onclick=demo;
+$('reset').onclick=()=>{demoing=false;open(L)};
+$('back').onclick=()=>{demoing=false;home()};
+
+home();
+</script>
+</body>
+</html>
